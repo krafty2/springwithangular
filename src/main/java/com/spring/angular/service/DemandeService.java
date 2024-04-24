@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.spring.angular.enums.Status;
 import com.spring.angular.models.Demande;
 import com.spring.angular.repository.DemandeRepository;
 
@@ -31,5 +32,9 @@ public class DemandeService {
 	
 	public List<Demande> typeDemandes(String typeDemande){
 		return demandeRepository.findByTypeDemande(typeDemande);
+	}
+	
+	public List<Demande> reabonnementAttente(Status status,String typeDemande){
+		return demandeRepository.findByStatusAndTypeDemande(status,typeDemande);
 	}
 }

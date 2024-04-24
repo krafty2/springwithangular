@@ -1,6 +1,6 @@
 package com.spring.angular.enums;
 
-public enum Statut {
+public enum Status {
 	EN_ATTENTE,
 	VALIDE
 }

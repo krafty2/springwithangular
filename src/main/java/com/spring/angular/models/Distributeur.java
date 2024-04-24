@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Entity @Data @AllArgsConstructor @NoArgsConstructor
 public class Distributeur extends Utilisateur {
-	private String codeDistributeur;
+//	private String codeDistributeur;
 	private Double longitude;
 	private Double latitude;
 }

@@ -2,7 +2,7 @@ package com.spring.angular.models;
 
 import java.sql.Date;
 
-import com.spring.angular.enums.Statut;
+import com.spring.angular.enums.Status;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -32,7 +32,7 @@ public class Demande {
 	private String date_finAbonnement;
 	private boolean parabole;
 	@Enumerated(EnumType.STRING)
-	private Statut status;
+	private Status status;
 	@OneToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
