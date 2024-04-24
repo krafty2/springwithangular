@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.angular.SpringwithangularApplication;
-import com.spring.angular.enums.Promo;
 import com.spring.angular.models.Offre;
 import com.spring.angular.service.OffreService;
 

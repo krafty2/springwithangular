@@ -25,7 +25,11 @@ public class DemandeService {
 		return demandeRepository.findAll();
 	}
 	
-	public List<Demande> listRecrutement(){
-		return demandeRepository.listeRecrutDemande();
+//	public List<Object[]> listRecrutement(){
+//		return demandeRepository.listeRecrutDemande("recrutement");
+//	}
+	
+	public List<Demande> typeDemandes(String typeDemande){
+		return demandeRepository.findByTypeDemande(typeDemande);
 	}
 }

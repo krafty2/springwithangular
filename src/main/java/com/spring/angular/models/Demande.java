@@ -5,6 +5,7 @@ import java.sql.Date;
 import com.spring.angular.enums.Statut;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -23,7 +24,8 @@ public class Demande {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idLong;
 	private String date_demande;
-	private String type_demande;
+	@Column(name = "type_demande")
+	private String typeDemande;
 	private int duree_abonnement;
 	private double commission;
 	private String date_debutAbonnement;
