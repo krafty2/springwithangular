@@ -21,4 +21,8 @@ public class GerantService {
 	public Optional<Gerant> searchGerant(Long id){
 		return gerantRepository.findById(id);
 	}
+	
+	public Optional<Gerant> searchGerantByCode(String code){
+		return gerantRepository.findByCodeGerant(code);
+	}
 }

@@ -23,8 +23,12 @@ public class DistributeurService {
 		return distributeurRepository.save(distributeur);
 	}
 	
-	public Optional<Distributeur> searchGerant(Long id){
+	public Optional<Distributeur> searchDistribById(Long id){
 		return distributeurRepository.findById(id);
+	}
+	
+	public Optional<Distributeur> searchDistribByCode(String code){
+		return distributeurRepository.findByCodeDistributeur(code);
 	}
 	
 	public List<Distributeur> allDistrib(){

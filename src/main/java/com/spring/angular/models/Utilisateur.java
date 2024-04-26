@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 public class Utilisateur {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idLong;
+	private String username;
 	private String nom;
 	private String prenom;
 	private String telephone;

@@ -24,6 +24,8 @@ import com.spring.angular.service.ClientService;
 import com.spring.angular.service.DemandeService;
 import com.spring.angular.service.OffreService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/demande/")
 @CrossOrigin(origins = "*")
@@ -43,13 +45,16 @@ public class DemandeController {
 	// Get api
 	
 	@GetMapping("/recrutement")
-	@PreAuthorize("hasAuthority('SCOPE_Gerant')")
+	@SecurityRequirement(name = "Bearer Authentication")
+	@PreAuthorize("hasRole('Gerant')")
 	public List<Demande> allRecrut(Authentication authentication){
 		System.out.println(authentication.getAuthorities());
 		return demandeService.typeDemandes("recrutement");
 	}
 	
+	
 	@GetMapping("/reabonnement")
+	@PreAuthorize("hasRole('Gerant')")
 	public List<Demande> allReabo(){
 		return demandeService.typeDemandes("reabonnement");
 	}
