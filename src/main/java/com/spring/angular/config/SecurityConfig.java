@@ -75,7 +75,7 @@ public class SecurityConfig {
 			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 				
 				// TODO Auto-generated method stub
-				Utilisateur appUser=utilisateurService.searchByNom(username).get();
+				Utilisateur appUser=utilisateurService.searchByUserName(username).get();
                 if (appUser==null) throw new UsernameNotFoundException("User not found");
                 //Collection<GrantedAuthority> authorities= List.of(new SimpleGrantedAuthority("USER"));
                 Collection<GrantedAuthority> authorities=appUser.getRoles().stream().map(r->new SimpleGrantedAuthority(r.getRoleName())).collect(Collectors.toList());

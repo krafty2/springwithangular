@@ -1,6 +1,6 @@
 package com.spring.angular.models;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.spring.angular.enums.Status;
 
@@ -23,16 +23,17 @@ import lombok.NoArgsConstructor;
 public class Demande {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idLong;
-	private String date_demande;
+	private Date date_demande;
 	@Column(name = "type_demande")
 	private String typeDemande;
 	private int duree_abonnement;
 	private double commission;
-	private String date_debutAbonnement;
-	private String date_finAbonnement;
+	private Date date_debutAbonnement;
+	private Date date_finAbonnement;
 	private boolean parabole;
 	@Enumerated(EnumType.STRING)
 	private Status status;
+	private double montantDemande;
 	@OneToOne
 	@JoinColumn(name = "client_id")
 	private Client client;

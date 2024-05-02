@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.angular.enums.Status;
 import com.spring.angular.models.Demande;
+import com.spring.angular.models.Distributeur;
 
 @Repository
 public interface DemandeRepository extends JpaRepository<Demande, Long> {
@@ -19,4 +20,12 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
 	List<Demande> findByTypeDemande(String typeDemande);
 	
 	List<Demande> findByStatusAndTypeDemande(Status status,String typeDemande);
+	
+	List<Demande> findByTypeDemandeAndDistributeur(String typeDemande,Distributeur distributeur);
+	
+	@Query(value = "SELECT * \r\n"
+			+ "FROM demande \r\n"
+			+ "WHERE extract(month from date_demande)=?1\r\n"
+			+ "AND extract(year from date_demande)=?2",nativeQuery = true)
+	List<Object[]> searchList(Integer month,Integer year);
 }

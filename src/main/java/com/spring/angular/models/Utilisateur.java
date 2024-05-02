@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.spring.angular.enums.AccountStatus;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
 public class Utilisateur {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idLong;
+	@Column(unique = true)
 	private String username;
 	private String nom;
 	private String prenom;

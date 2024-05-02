@@ -17,4 +17,8 @@ public class UtilisateurService {
 	public Optional<Utilisateur> searchByNom(String nom){
 		return utilisateurRepository.findByNom(nom);
 	}
+	
+	public Optional<Utilisateur> searchByUserName(String username){
+		return utilisateurRepository.findByUsername(username);
+	}
 }

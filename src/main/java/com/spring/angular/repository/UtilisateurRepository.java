@@ -11,4 +11,6 @@ import com.spring.angular.models.Utilisateur;
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 	
 	public Optional<Utilisateur> findByNom(String nom);
+	
+	public Optional<Utilisateur> findByUsername(String username);
 }
