@@ -3,7 +3,9 @@ package com.spring.angular;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -24,6 +26,7 @@ import com.spring.angular.service.DistributeurService;
 import com.spring.angular.service.GerantService;
 import com.spring.angular.service.RoleService;
 import com.spring.angular.service.UtilisateurService;
+import com.spring.angular.service.CanalService;
 
 @SpringBootApplication
 @EnableConfigurationProperties(RsaKeyProperties.class)
@@ -53,7 +56,8 @@ public class SpringwithangularApplication {
 	    CommandLineRunner start(
 	    		RoleService roleService,GerantService gerantService,
 	    		DistributeurService distributeurService, PasswordEncoder passwordEncoder,
-	    		UtilisateurService utilisateurService,DemandeService demandeService){
+	    		UtilisateurService utilisateurService,DemandeService demandeService,
+	    		CanalService canalService){
 	        return args -> {
 	        	
 	        	
@@ -104,13 +108,10 @@ public class SpringwithangularApplication {
 	    		
 	    		
 	    		
-	    		System.out.println(listeDemandes);
+	    		//System.out.println(canalService.commissionDistrib());
 	    		
-	    		demandeService.searchByDateDemandes().stream().forEach((demande)->{
-	    			//System.out.println(demande[6]);
-	    			Long idLong = (Long) demande[0];
-	    			//System.out.println(demandeService.searchById(idLong).get());
-	    		});
+	    		//Calcule chiffre affaire
+	    		
 	        };
 	    }
 

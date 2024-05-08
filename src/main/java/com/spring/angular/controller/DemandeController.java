@@ -74,6 +74,20 @@ public class DemandeController {
 		return demandeService.reabonnementAttente(Status.EN_ATTENTE,"recrutement");
 	}
 	
+	@GetMapping("/demande_distrib_en_attente")
+	public List<Demande> demandeDistribAttente(Authentication authentication){
+		
+		Distributeur distributeur = (Distributeur) utilisateurService.searchByUserName(authentication.getName()).get();
+		
+		return demandeService.listeDemandeDistribAttente("reabonnement", distributeur, Status.EN_ATTENTE);
+	}
+	
+	@GetMapping("/demande_distrib_en_attente_recru")
+	public List<Demande> demandeDistribReaboAttente(Authentication authentication){
+		Distributeur distributeur = (Distributeur) utilisateurService.searchByUserName(authentication.getName()).get();
+		
+		return demandeService.listeDemandeDistribAttente("recrutement", distributeur, Status.EN_ATTENTE);
+	}
 	
 	//Post api
 	

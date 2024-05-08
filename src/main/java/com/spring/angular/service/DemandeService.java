@@ -28,8 +28,8 @@ public class DemandeService {
 		return demandeRepository.findAll();
 	}
 	
-	public List<Object[]> searchByDateDemandes(){
-		return demandeRepository.searchList(4,2024);
+	public List<Object[]> searchByDateDemandes(Integer month,Integer years){
+		return demandeRepository.searchList(month,years);
 	}
 	
 	public Optional<Demande> searchById(Long id){
@@ -50,5 +50,13 @@ public class DemandeService {
 	//Distrib Service
 	public List<Demande> listeDemandeDistrib(String typeDemande,Distributeur distributeur){
 		return demandeRepository.findByTypeDemandeAndDistributeur(typeDemande, distributeur);
+	}
+	
+	public List<Demande> listeDemandeDistribAttente(String typeDemande,Distributeur distributeur,Status status){
+		return demandeRepository.findByTypeDemandeAndDistributeurAndStatus(typeDemande, distributeur, status);
+	}
+	
+	public List<Demande> saerchByDistrib(Distributeur distributeur,Status status){
+		return demandeRepository.findByDistributeurAndStatus(distributeur,status);
 	}
 }

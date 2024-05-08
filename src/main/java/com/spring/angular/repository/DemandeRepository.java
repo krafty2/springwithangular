@@ -21,11 +21,16 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
 	
 	List<Demande> findByStatusAndTypeDemande(Status status,String typeDemande);
 	
+	List<Demande> findByDistributeurAndStatus(Distributeur distributeur,Status status);
+	
 	List<Demande> findByTypeDemandeAndDistributeur(String typeDemande,Distributeur distributeur);
+	
+	List<Demande> findByTypeDemandeAndDistributeurAndStatus(String typeDemande,Distributeur distributeur,Status status);
 	
 	@Query(value = "SELECT * \r\n"
 			+ "FROM demande \r\n"
 			+ "WHERE extract(month from date_demande)=?1\r\n"
-			+ "AND extract(year from date_demande)=?2",nativeQuery = true)
+			+ "AND extract(year from date_demande)=?2\r\n"
+			+"AND status='VALIDE'",nativeQuery = true)
 	List<Object[]> searchList(Integer month,Integer year);
 }

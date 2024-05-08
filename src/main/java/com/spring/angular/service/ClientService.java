@@ -1,5 +1,6 @@
 package com.spring.angular.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -23,5 +24,9 @@ public class ClientService {
 	
 	public Optional<Client> searchClientByDecodeur(String numero_decodeur){
 		return clientRepository.findByDecodeur(numero_decodeur);
+	}
+	
+	public List<Client> allClients(){
+		return clientRepository.findAll();
 	}
 }

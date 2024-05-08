@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,9 @@ import com.spring.angular.enums.AccountStatus;
 import com.spring.angular.models.Demande;
 import com.spring.angular.models.Distributeur;
 import com.spring.angular.models.Role;
+import com.spring.angular.models.Utilisateur;
+import com.spring.angular.records.CommisRecord;
+import com.spring.angular.service.CanalService;
 import com.spring.angular.service.DemandeService;
 import com.spring.angular.service.DistributeurService;
 import com.spring.angular.service.RoleService;
@@ -46,6 +50,9 @@ public class DistributeurController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private CanalService canalService;
 
 
 	//GetMapping
@@ -64,6 +71,11 @@ public class DistributeurController {
 									.get();
 		
 		return demandeService.listeDemandeDistrib(typeDemande, distributeur);
+	}
+	
+	@GetMapping("/commission")
+	public CommisRecord commission(Authentication authentication) {
+		return canalService.commissionDistrib(authentication);
 	}
 	
 	//PostMapping
@@ -115,5 +127,28 @@ public class DistributeurController {
 		}
 		
 		return ResponseEntity.ok().build();
+	}
+	
+	@PutMapping("/update_distributeur")
+	public ResponseEntity<Distributeur> updateDistrib(@RequestBody Distributeur distributeur){
+		if(distributeur!=null) {
+			
+			String password = distributeur.getPassword();
+			
+			Optional<Utilisateur> existingUtilisateur = utilisateurService
+					.searchByUserName(distributeur.getUsername());
+			
+			Optional<Distributeur> existingDistrib = distributeurService.searchDistribByCode(distributeur.getCodeDistributeur());
+				
+			if(!password.equals(existingUtilisateur.get().getPassword())) {
+				distributeur.setPassword(passwordEncoder.encode(password));
+			}
+			
+			distributeurService.saveDistributeur(distributeur);
+			System.out.println(distributeur);
+			return new ResponseEntity<Distributeur>(distributeur,HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<Distributeur>(distributeur,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

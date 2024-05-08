@@ -39,6 +39,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.spring.angular.enums.AccountStatus;
 import com.spring.angular.models.Utilisateur;
 import com.spring.angular.service.UtilisateurService;
 
@@ -77,8 +78,13 @@ public class SecurityConfig {
 				// TODO Auto-generated method stub
 				Utilisateur appUser=utilisateurService.searchByUserName(username).get();
                 if (appUser==null) throw new UsernameNotFoundException("User not found");
+                if(appUser.getAccountStatus() != AccountStatus.ACTIVATED) 
+                	throw new UsernameNotFoundException("User Account not activated");
                 //Collection<GrantedAuthority> authorities= List.of(new SimpleGrantedAuthority("USER"));
-                Collection<GrantedAuthority> authorities=appUser.getRoles().stream().map(r->new SimpleGrantedAuthority(r.getRoleName())).collect(Collectors.toList());
+                Collection<GrantedAuthority> authorities=appUser
+                		.getRoles().stream()
+                		.map(r->new SimpleGrantedAuthority(
+                				r.getRoleName())).collect(Collectors.toList());
                 return new User(username,appUser.getPassword(),authorities);
 			}
 		};
@@ -102,7 +108,8 @@ public class SecurityConfig {
 			.cors(Customizer.withDefaults())
 			.headers().frameOptions().disable().and()
 			.csrf(csrf->csrf.disable())
-			.authorizeHttpRequests(auth -> auth.requestMatchers("/public/**").permitAll() )
+			.authorizeHttpRequests(auth -> auth.requestMatchers("/public/**","/swagger-ui/**"
+            		,"/v3/**","/swagger-ui.html").permitAll() )
 			.authorizeHttpRequests(auth->auth.anyRequest().authenticated())
 			.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)

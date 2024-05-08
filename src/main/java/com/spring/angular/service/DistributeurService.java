@@ -6,13 +6,14 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.spring.angular.models.Distributeur;
-import com.spring.angular.models.Gerant;
 import com.spring.angular.repository.DistributeurRepository;
 
 @Service
 public class DistributeurService {
 
 	private DistributeurRepository distributeurRepository;
+	
+	
 
 	public DistributeurService(DistributeurRepository distributeurRepository) {
 		super();
