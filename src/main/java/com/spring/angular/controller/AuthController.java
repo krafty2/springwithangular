@@ -150,12 +150,12 @@ public class AuthController {
 		Map<String, String> response;
 
 		if (grandType.equals("password")) {
-			System.out.println(utilisateurService.searchByUserName(username).get());
+			System.out.println("non");
 			Authentication authentication = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
 							username, password));
 
-			System.out.println("hello" + authentication.getAuthorities());
+			System.out.println("hello" + authentication);
 
 			response = tokenService.generateJwtToken(authentication.getName(), authentication.getAuthorities(),
 					withRefreshToken);
@@ -176,6 +176,7 @@ public class AuthController {
 			response = tokenService.generateJwtToken(appUser.getNom(), authorities, withRefreshToken);
 			return ResponseEntity.ok(response);
 		}
+		
 		return new ResponseEntity<Map<String, String>>(
 				Map.of("error", String.format("grantType <<%s>> not supported ", grandType)), HttpStatus.UNAUTHORIZED);
 	}

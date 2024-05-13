@@ -100,11 +100,16 @@ public class SpringwithangularApplication {
 		        	gerantService.saveGerant(gerant);
 	    		}
 	    		
-	    		Distributeur distributeur = (Distributeur) utilisateurService.searchByUserName("L100101").get();
-	    		
-	    		List<Demande> listeDemandes = new ArrayList<>();
+	    		if(utilisateurService.searchByUserName("L100101").isPresent()) {
+	    			Distributeur distributeur = (Distributeur) utilisateurService.searchByUserName("L100101").get();
+	    			List<Demande> listeDemandes = new ArrayList<>();
 	    		
 	    		listeDemandes = demandeService.listeDemandeDistrib("reabonnement", distributeur);
+	    		}
+	    		
+	    		
+	    		
+	    		
 	    		
 	    		
 	    		

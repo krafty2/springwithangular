@@ -1,5 +1,6 @@
 package com.spring.angular.config;
 
+import java.awt.event.FocusEvent.Cause;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -77,7 +78,7 @@ public class SecurityConfig {
 				
 				// TODO Auto-generated method stub
 				Utilisateur appUser=utilisateurService.searchByUserName(username).get();
-                if (appUser==null) throw new UsernameNotFoundException("User not found");
+                if (appUser==null)  throw new UsernameNotFoundException("User not found");
                 if(appUser.getAccountStatus() != AccountStatus.ACTIVATED) 
                 	throw new UsernameNotFoundException("User Account not activated");
                 //Collection<GrantedAuthority> authorities= List.of(new SimpleGrantedAuthority("USER"));

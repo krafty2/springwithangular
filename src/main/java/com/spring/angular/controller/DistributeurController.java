@@ -139,8 +139,10 @@ public class DistributeurController {
 					.searchByUserName(distributeur.getUsername());
 			
 			Optional<Distributeur> existingDistrib = distributeurService.searchDistribByCode(distributeur.getCodeDistributeur());
-				
-			if(!password.equals(existingUtilisateur.get().getPassword())) {
+			
+			System.out.println(existingDistrib);
+			
+			if(!password.equals(existingDistrib.get().getPassword())) {
 				distributeur.setPassword(passwordEncoder.encode(password));
 			}
 			
