@@ -30,6 +30,7 @@ import com.spring.angular.service.CanalService;
 
 @SpringBootApplication
 @EnableConfigurationProperties(RsaKeyProperties.class)
+
 public class SpringwithangularApplication {
 	
 	//private static final Logger log = LoggerFactory.getLogger(SpringwithangularApplication.class);

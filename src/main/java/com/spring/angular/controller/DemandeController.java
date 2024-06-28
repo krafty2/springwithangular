@@ -58,7 +58,7 @@ public class DemandeController {
 	
 	
 	@GetMapping("/reabonnement")
-	@PreAuthorize("hasAuthority('SCOPE_Gerant')")
+	// @PreAuthorize("hasAuthority('SCOPE_Gerant')")
 	public List<Demande> allReabo(){
 		
 		return demandeService.typeDemandes("reabonnement");
